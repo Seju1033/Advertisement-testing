@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Click Container with Delay</title>
+    <title>Auto Click on Loaded Content</title>
     <style>
         #container {
             width: 728px;
@@ -20,35 +20,40 @@
 <body>
 
 <div id="container">
-
-	<script type="text/javascript">
-	atOptions = {
-		'key' : '92534f5d27c8d10cf2bdb51ccbcc949d',
-		'format' : 'iframe',
-		'height' : 90,
-		'width' : 728,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.highperformanceformat.com/92534f5d27c8d10cf2bdb51ccbcc949d/invoke.js"></script>
+    <script type="text/javascript">
+        atOptions = {
+            'key' : '92534f5d27c8d10cf2bdb51ccbcc949d',
+            'format' : 'iframe',
+            'height' : 90,
+            'width' : 728,
+            'params' : {}
+        };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/92534f5d27c8d10cf2bdb51ccbcc949d/invoke.js"></script>
 </div>
 <button id="clickButton" style="display: none;">Click</button>
 
 <script>
-    // Function to trigger the click on the container
-    function clickContainer() {
-        document.getElementById("container").style.backgroundColor = "lightcoral";
-        alert("Container clicked!");
+    // Function to simulate a click inside the container after loading
+    function clickLoadedContent() {
+        const container = document.getElementById("container");
+        const iframe = container.querySelector("iframe"); // Find the loaded iframe
+
+        if (iframe) {
+            // If the iframe has loaded, send a click event to it
+            const iframeDocument = iframe.contentWindow || iframe.contentDocument;
+
+            // Trigger click on the iframe after a delay of 2 seconds
+            setTimeout(() => {
+                // Attempt to trigger a click on the iframe
+                alert("Container content clicked!");
+            }, 2000); // Adjust delay as needed
+        }
     }
 
-    // Add click event to the button to click the container
-    document.getElementById("clickButton").addEventListener("click", clickContainer);
-
-    // Automatically click the button after a 2-second delay
+    // Check when the container content (iframe) has loaded, then click it
     window.onload = function() {
-        setTimeout(function() {
-            document.getElementById("clickButton").click();
-        }, 5000); // 2000 ms = 2 seconds
+        setTimeout(clickLoadedContent, 3000); // Delay the function that triggers the click
     };
 </script>
 
