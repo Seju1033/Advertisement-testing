@@ -1,21 +1,48 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ad Script Test</title>
+    <title>Ad Script and Auto Click Test</title>
 </head>
 <body>
+    <button id="testButton">Click Me!</button>
+    <p id="clickCount">Button clicked: 0 times</p>
+
     <script type="text/javascript">
+        // Auto-click functionality
+        let count = 0;
+
+        // Function to simulate click
+        function autoClick() {
+            const button = document.getElementById('testButton');
+            button.click(); // Simulate the click
+
+            // Update click count
+            count++;
+            document.getElementById('clickCount').innerText = `Button clicked: ${count} times`;
+        }
+
+        // Set interval for auto clicking (e.g., every 2 seconds)
+        setInterval(autoClick, 2000);
+        
+        // Add a click event listener to the button
+        document.getElementById('testButton').addEventListener('click', function() {
+            console.log('Button was clicked!');
+        });
+    </script>
+
+    <script type="text/javascript">
+        // Ad script configuration
         atOptions = {
-            'key' : '92534f5d27c8d10cf2bdb51ccbcc949d',
-            'format' : 'iframe',
-            'height' : 90,
-            'width' : 728,
-            'params' : {}
+            'key': '92534f5d27c8d10cf2bdb51ccbcc949d',
+            'format': 'iframe',
+            'height': 90,
+            'width': 728,
+            'params': {}
         };
     </script>
     <script type="text/javascript" src="//www.highperformanceformat.com/92534f5d27c8d10cf2bdb51ccbcc949d/invoke.js"></script>
 </body>
 </html>
+
