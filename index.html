@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Click Container</title>
+    <title>Auto Click Container with Delay</title>
     <style>
         #container {
-            width: 200px;
-            height: 100px;
+            width: 728px;
+            height: 90px;
             background-color: lightblue;
             display: flex;
             align-items: center;
@@ -21,7 +21,7 @@
 
 <div id="container">
 
-    <script type="text/javascript">
+	<script type="text/javascript">
 	atOptions = {
 		'key' : '92534f5d27c8d10cf2bdb51ccbcc949d',
 		'format' : 'iframe',
@@ -44,9 +44,11 @@
     // Add click event to the button to click the container
     document.getElementById("clickButton").addEventListener("click", clickContainer);
 
-    // Automatically click the button after the page loads
+    // Automatically click the button after a 2-second delay
     window.onload = function() {
-        document.getElementById("clickButton").click();
+        setTimeout(function() {
+            document.getElementById("clickButton").click();
+        }, 2000); // 2000 ms = 2 seconds
     };
 </script>
 
