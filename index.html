@@ -16,7 +16,14 @@
         // Function to simulate click
         function autoClick() {
             const button = document.getElementById('testButton');
-            button.click(); // Simulate the click
+            // Create a new click event
+            const clickEvent = new MouseEvent('click', {
+                bubbles: true,
+                cancelable: true,
+                view: window
+            });
+            // Dispatch the click event on the button
+            button.dispatchEvent(clickEvent); 
 
             // Update click count
             count++;
@@ -45,4 +52,3 @@
     <script type="text/javascript" src="//www.highperformanceformat.com/92534f5d27c8d10cf2bdb51ccbcc949d/invoke.js"></script>
 </body>
 </html>
-
