@@ -3,81 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Styled Container with Auto-Click</title>
+    <title>Auto Click Container</title>
     <style>
-        /* Center the container on the page */
-        body {
+        #container {
+            width: 200px;
+            height: 100px;
+            background-color: lightblue;
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-        }
-
-        /* Style the container */
-        #textContainer {
-            width: 300px;
-            height: 150px;
-            background-color: #4CAF50;
-            color: white;
-            display: flex;
             justify-content: center;
-            align-items: center;
-            font-size: 1.2em;
-            text-align: center;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            position: relative;
-        }
-
-        #clickMessage {
+            font-size: 20px;
             margin-top: 20px;
-            font-size: 1em;
-            color: #333;
         }
     </style>
 </head>
 <body>
-    <div id="textContainer">Click Me Automatically!</div>
-    <p id="clickMessage">Container clicked: 0 times</p>
 
-    <script type="text/javascript">
-        let clickCount = 0;
+<div id="container">Container</div>
+<button id="clickButton" style="display: none;">Click</button>
 
-        // Function to simulate a click on the container
-        function autoClickContainer() {
-            const container = document.getElementById('textContainer');
-            const rect = container.getBoundingClientRect();
+<script>
+    // Function to trigger the click on the container
+    function clickContainer() {
+        document.getElementById("container").style.backgroundColor = "lightcoral";
+        alert("Container clicked!");
+    }
 
-            // Calculate center position of the container
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
+    // Add click event to the button to click the container
+    document.getElementById("clickButton").addEventListener("click", clickContainer);
 
-            // Create a click event at the center of the container
-            const clickEvent = new MouseEvent('click', {
-                clientX: centerX,
-                clientY: centerY,
-                bubbles: true,
-                cancelable: true,
-                view: window
-            });
+    // Automatically click the button after the page loads
+    window.onload = function() {
+        document.getElementById("clickButton").click();
+    };
+</script>
 
-            // Dispatch the click event on the container
-            container.dispatchEvent(clickEvent);
-        }
-
-        // Event listener to update the click count message
-        document.getElementById('textContainer').addEventListener('click', function() {
-            clickCount++;
-            document.getElementById('clickMessage').innerText = `Container clicked: ${clickCount} times`;
-        });
-
-        // Wait 0.5 seconds, then simulate a click on the container
-        setTimeout(autoClickContainer, 500);
-    </script>
 </body>
 </html>
-
