@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Click on Loaded Content</title>
+    <title>Redirect after Script Loads</title>
     <style>
         #container {
             width: 728px;
@@ -31,29 +31,18 @@
     </script>
     <script type="text/javascript" src="//www.highperformanceformat.com/92534f5d27c8d10cf2bdb51ccbcc949d/invoke.js"></script>
 </div>
-<button id="clickButton" style="display: none;">Click</button>
 
 <script>
-    // Function to simulate a click inside the container after loading
-    function clickLoadedContent() {
-        const container = document.getElementById("container");
-        const iframe = container.querySelector("iframe"); // Find the loaded iframe
-
-        if (iframe) {
-            // If the iframe has loaded, send a click event to it
-            const iframeDocument = iframe.contentWindow || iframe.contentDocument;
-
-            // Trigger click on the iframe after a delay of 2 seconds
-            setTimeout(() => {
-                // Attempt to trigger a click on the iframe
-                alert("Container content clicked!");
-            }, 2000); // Adjust delay as needed
-        }
+    // Redirect function that simulates a click by redirecting the page
+    function redirectToTarget() {
+        // Specify the target URL you want to redirect to
+        const targetUrl = "https://your-redirect-url.com";
+        window.location.href = targetUrl;
     }
 
-    // Check when the container content (iframe) has loaded, then click it
+    // Automatically redirect after a 3-second delay once the page loads
     window.onload = function() {
-        setTimeout(clickLoadedContent, 3000); // Delay the function that triggers the click
+        setTimeout(redirectToTarget, 3000); // 3000 ms = 3 seconds
     };
 </script>
 
