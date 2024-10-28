@@ -3,15 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ad Script Auto Click Test</title>
+    <title>Ad Container with Auto-Click</title>
+    <style>
+        #adContainer {
+            width: 728px; /* Ad width */
+            height: 90px; /* Ad height */
+            position: relative;
+            border: 1px solid #ccc; /* Optional: Border to visualize the container */
+        }
+    </style>
 </head>
 <body>
     <div id="adContainer"></div>
-    <p id="clickCount">Ad clicked: 0 times</p>
 
     <script type="text/javascript">
         // Ad script configuration
-        const atOptions = {
+        atOptions = {
             'key': '92534f5d27c8d10cf2bdb51ccbcc949d',
             'format': 'iframe',
             'height': 90,
@@ -19,38 +26,39 @@
             'params': {}
         };
 
-        // Function to invoke the ad script
-        function invokeAd() {
+        // Function to load the ad into the container
+        function loadAd() {
             const script = document.createElement('script');
             script.src = "//www.highperformanceformat.com/92534f5d27c8d10cf2bdb51ccbcc949d/invoke.js";
             document.getElementById('adContainer').appendChild(script);
         }
 
-        // Auto-click functionality for the ad
-        let adClickCount = 0;
-
+        // Function to simulate a click in the center of the container
         function autoClickAd() {
             const adContainer = document.getElementById('adContainer');
+            const rect = adContainer.getBoundingClientRect();
 
-            // Create a new click event
+            // Calculate center position of the container
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            // Create a new click event at the center coordinates
             const clickEvent = new MouseEvent('click', {
+                clientX: centerX,
+                clientY: centerY,
                 bubbles: true,
                 cancelable: true,
                 view: window
             });
 
-            // Dispatch the click event on the ad container
+            // Dispatch the click event on the container
             adContainer.dispatchEvent(clickEvent);
-
-            // Update click count
-            adClickCount++;
-            document.getElementById('clickCount').innerText = `Ad clicked: ${adClickCount} times`;
         }
 
-        // Invoke the ad script
-        invokeAd();
+        // Load the ad
+        loadAd();
 
-        // Set a timeout for auto clicking (e.g., after 0.5 seconds)
+        // Wait 0.5 seconds and then simulate a click on the container
         setTimeout(autoClickAd, 500);
     </script>
 </body>
