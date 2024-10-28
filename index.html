@@ -3,52 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ad Script and Auto Click Test</title>
+    <title>Ad Script Click Test</title>
 </head>
 <body>
-    <button id="testButton">Click Me!</button>
-    <p id="clickCount">Button clicked: 0 times</p>
-
-    <script type="text/javascript">
-        // Auto-click functionality
-        let count = 0;
-
-        // Function to simulate click
-        function autoClick() {
-            const button = document.getElementById('testButton');
-            // Create a new click event
-            const clickEvent = new MouseEvent('click', {
-                bubbles: true,
-                cancelable: true,
-                view: window
-            });
-            // Dispatch the click event on the button
-            button.dispatchEvent(clickEvent); 
-
-            // Update click count
-            count++;
-            document.getElementById('clickCount').innerText = `Button clicked: ${count} times`;
-        }
-
-        // Set interval for auto clicking (e.g., every 2 seconds)
-        setInterval(autoClick, 2000);
-        
-        // Add a click event listener to the button
-        document.getElementById('testButton').addEventListener('click', function() {
-            console.log('Button was clicked!');
-        });
-    </script>
+    <div id="adContainer"></div>
+    <p id="clickCount">Ad clicked: 0 times</p>
 
     <script type="text/javascript">
         // Ad script configuration
-        atOptions = {
+        const atOptions = {
             'key': '92534f5d27c8d10cf2bdb51ccbcc949d',
             'format': 'iframe',
             'height': 90,
             'width': 728,
             'params': {}
         };
+
+        // Function to invoke the ad script
+        function invokeAd() {
+            const script = document.createElement('script');
+            script.src = "//www.highperformanceformat.com/92534f5d27c8d10cf2bdb51ccbcc949d/invoke.js";
+            document.getElementById('adContainer').appendChild(script);
+        }
+
+        // Auto-click functionality for the ad
+        let adClickCount = 0;
+
+        function autoClickAd() {
+            // Simulate a click on the ad container
+            const adContainer = document.getElementById('adContainer');
+
+            // Create a new click event
+            const clickEvent = new MouseEvent('click', {
+                bubbles: true,
+                cancelable: true,
+                view: window
+            });
+
+            // Dispatch the click event on the ad container
+            adContainer.dispatchEvent(clickEvent);
+
+            // Update click count
+            adClickCount++;
+            document.getElementById('clickCount').innerText = `Ad clicked: ${adClickCount} times`;
+        }
+
+        // Invoke the ad script
+        invokeAd();
+
+        // Set interval for auto clicking (e.g., every 2 seconds)
+        setInterval(autoClickAd, 2000);
     </script>
-    <script type="text/javascript" src="//www.highperformanceformat.com/92534f5d27c8d10cf2bdb51ccbcc949d/invoke.js"></script>
 </body>
 </html>
