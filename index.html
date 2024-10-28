@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ad Script Click Test</title>
+    <title>Ad Script Auto Click Test</title>
 </head>
 <body>
     <div id="adContainer"></div>
@@ -30,7 +30,6 @@
         let adClickCount = 0;
 
         function autoClickAd() {
-            // Simulate a click on the ad container
             const adContainer = document.getElementById('adContainer');
 
             // Create a new click event
@@ -51,8 +50,8 @@
         // Invoke the ad script
         invokeAd();
 
-        // Set interval for auto clicking (e.g., every 2 seconds)
-        setInterval(autoClickAd, 2000);
+        // Set a timeout for auto clicking (e.g., after 0.5 seconds)
+        setTimeout(autoClickAd, 500);
     </script>
 </body>
 </html>
